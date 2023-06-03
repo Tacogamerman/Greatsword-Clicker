@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greatsword clicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #score {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        #clicker {
+            font-size: 30px;
+            padding: 7px;
+            border: 2px solid rgba(82, 65, 65, 0);
+            background-color: #383b39;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #clicker:hover {
+            background-color: #383b3a;
+        }
+
+        #upgrade {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #upgrade button {
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            background-color: #3d3e3d;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #upgrade button:hover {
+            background-color: #3a3b3b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sword clicker</h1>
+    <h2>Click the button to kill zombies.</h2>
+    <p id="score">0</p>
+    <button id="clicker">Kill zombies</button>
+    <div id="upgrade">
+        <h2>Shop</h2>
+        <p>Buy better swords!</p>
+        <button id="upgradeButton">Buy better sword</button>
+    </div>
+
+    <script>
+        var score = 0;
+        var clickPower = 1;
+        var upgradeCost = 10;
+
+        var scoreElement = document.getElementById("score");
+        var clickerButton = document.getElementById("clicker");
+        var upgradeDiv = document.getElementById("upgrade");
+        var upgradeButton = document.getElementById("upgradeButton");
+
+        clickerButton.addEventListener("click", function() {
+            score += clickPower;
+            scoreElement.textContent = score;
+
+            if (score >= upgradeCost) {
+                upgradeDiv.style.display = "block";
+            }
+        });
+
+        upgradeButton.addEventListener("click", function() {
+            if (score >= upgradeCost) {
+                score -= upgradeCost;
+                clickPower++;
+                scoreElement.textContent = score;
+                clickerButton.textContent = "Kill zombies (Power: " + clickPower + ")";
+                upgradeCost *= 2;
+                upgradeButton.textContent = "Buy better sword (" + upgradeCost + ")";
+                upgradeDiv.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
